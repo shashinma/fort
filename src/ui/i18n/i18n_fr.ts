@@ -1096,6 +1096,10 @@ Assurez-vous d&apos;avoir une nouvelle sauvegarde.</translation>
         <source>Shortcut:</source>
         <translation>Raccourci:</translation>
     </message>
+    <message>
+        <source>Auto-update</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OptionsWindow</name>
