@@ -17,7 +17,8 @@
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 SetupMutex=Global\{#APP_BASE}Setup
-; Don't use AppMutex, and auto-restart the running instances
+; Don't use AppMutex
+RestartApplications=no
 AppName={#APP_NAME}
 AppVersion={#APP_VERSION_STR}
 VersionInfoVersion={#APP_VERSION_STR}

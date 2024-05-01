@@ -106,14 +106,13 @@ void ServiceManager::processControl(quint32 code, quint32 eventType)
         state = SERVICE_RUNNING;
     } break;
     case SERVICE_CONTROL_STOP: {
-        if (!acceptStop())
-            break;
+        state = acceptStop() ? SERVICE_STOP_PENDING : 0;
+    } break;
+    case FORT_SERVICE_CONTROL_UNINSTALL: {
+        emit uninstallRequested();
     }
         Q_FALLTHROUGH();
-    case FORT_SERVICE_CONTROL_UNINSTALL:
     case SERVICE_CONTROL_SHUTDOWN: {
-        OsUtil::quit("service control"); // it's threadsafe
-
         state = SERVICE_STOP_PENDING;
     } break;
     case SERVICE_CONTROL_DEVICEEVENT: {
@@ -121,6 +120,10 @@ void ServiceManager::processControl(quint32 code, quint32 eventType)
             emit driveListChanged();
         }
     } break;
+    }
+
+    if (state == SERVICE_STOP_PENDING) {
+        OsUtil::quit("service control"); // it's threadsafe
     }
 
     reportStatus(state);
